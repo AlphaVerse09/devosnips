@@ -1,0 +1,37 @@
+
+"use client";
+
+import type { Snippet } from "@/types";
+import { SnippetItem } from "./snippet-item";
+import { ShieldAlert } from "lucide-react";
+
+interface SnippetListProps {
+  snippets: Snippet[];
+  onEdit: (snippet: Snippet) => void;
+  onDelete: (snippetId: string) => void;
+}
+
+export function SnippetList({ snippets, onEdit, onDelete }: SnippetListProps) {
+  if (snippets.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <ShieldAlert className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+        <h3 className="text-xl font-semibold font-headline">No Snippets Found</h3>
+        <p className="text-muted-foreground">Try adding a new snippet or adjusting your filters.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {snippets.map((snippet) => (
+        <SnippetItem
+          key={snippet.id}
+          snippet={snippet}
+          onEdit={onEdit}
+          onDelete={onDelete}
+        />
+      ))}
+    </div>
+  );
+}
