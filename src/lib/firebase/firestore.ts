@@ -355,7 +355,7 @@ async function seedChangelog() {
 
 // Uncomment the line below to run the seed function once during development startup.
 // Make sure to comment it out again after it has run to avoid writing it on every server restart.
-// seedChangelog();
+seedChangelog();
 
 export async function getChangelogs(): Promise<ChangelogEntry[]> {
   const changelogsCol = getChangelogsCollection();
