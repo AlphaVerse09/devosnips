@@ -14,6 +14,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
+  AlertDialogTrigger, // Added the missing import here
 } from "@/components/ui/alert-dialog";
 import { ClipboardCopy, Edit3, Trash2, FileCode2, CodeSquare, Palette, FileQuestion, FolderKanban, FileText, Database, LayoutGrid, Type, Code } from "lucide-react";
 import type { Snippet, SnippetCategory } from "@/types";
@@ -70,8 +71,8 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const { resolvedTheme } = useTheme(); // Use resolvedTheme to get the actual applied theme
-  const [currentPrismTheme, setCurrentPrismTheme] = useState(prismThemes.nightOwl);
+  const { resolvedTheme } = useTheme();
+  const [currentPrismTheme, setCurrentPrismTheme] = useState(prismThemes.vsLight);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -79,7 +80,6 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
   }, []);
 
   useEffect(() => {
-    // We only want to set the theme after the component has mounted to avoid hydration mismatches
     if (isMounted) {
       setCurrentPrismTheme(resolvedTheme === 'dark' ? prismThemes.nightOwl : prismThemes.vsLight);
     }
@@ -103,9 +103,7 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
   };
 
   const CategoryIcon = categoryIcons[snippet.category] || FileQuestion;
-  const MAX_PREVIEW_LINES = 5;
 
-  // Render a placeholder or null until mounted to prevent hydration errors
   if (!isMounted) {
     return (
         <Card className="shadow-lg flex flex-col animate-pulse">
@@ -163,32 +161,25 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
                 "p-3 rounded-md overflow-x-auto text-sm max-h-60 font-code",
                 prismClassName
               )}
-              style={style} // Theme styles (background, text color) applied here
+              style={style}
             >
-              {tokens.slice(0, MAX_PREVIEW_LINES).map((line, i) => {
+              {tokens.map((line, i) => {
                 const { key: lineKey, ...restOfLineProps } = getLineProps({ line, key: i });
                 
-                // Remove background color from lineProps if theme applies it to pre
-                // Ensure style and restOfLineProps.style exist before trying to delete
                 if (style && style.backgroundColor && restOfLineProps.style && restOfLineProps.style.backgroundColor) {
                      delete restOfLineProps.style.backgroundColor;
                 }
                 return(
-                  // Rely on key from getLineProps
                   <div key={lineKey} {...restOfLineProps}> 
                     {line.map((token, tokenIdx) => {
                       const { key: tokenKey, ...restOfTokenProps } = getTokenProps({ token, key: tokenIdx });
                       return (
-                        // Rely on key from getTokenProps
                         <span key={tokenKey} {...restOfTokenProps} /> 
                       );
                     })}
                   </div>
                 );
               })}
-              {tokens.length > MAX_PREVIEW_LINES && (
-                <div className="select-none opacity-75">... (more)</div>
-              )}
             </pre>
           )}
         </Highlight>
