@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { PlusCircle, LogOut, BookText } from 'lucide-react';
+import { PlusCircle, LogOut } from 'lucide-react';
 import { ThemeToggleButton } from '@/components/theme-toggle-button';
 import { Button } from '@/components/ui/button';
 import {
@@ -13,16 +13,14 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface AppHeaderProps {
   onAddSnippet: () => void;
-  onShowChangelog: () => void;
   onSignOut?: () => void;
   userEmail?: string | null;
 }
 
-export function AppHeader({ onAddSnippet, onShowChangelog, onSignOut, userEmail }: AppHeaderProps) {
+export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps) {
   const getInitials = (email?: string | null) => {
     if (!email) return "?";
     const parts = email.split("@")[0].split(/[._-]/);
@@ -42,18 +40,6 @@ export function AppHeader({ onAddSnippet, onShowChangelog, onSignOut, userEmail 
         <nav className="flex items-center space-x-1 sm:space-x-2">
           {userEmail && (
             <>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button onClick={onShowChangelog} variant="ghost" size="icon" className="hidden sm:inline-flex">
-                    <BookText className="h-5 w-5" />
-                    <span className="sr-only">Changelog</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Changelog</p>
-                </TooltipContent>
-              </Tooltip>
-
               <Button onClick={onAddSnippet} variant="outline" className="h-9">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add Snippet

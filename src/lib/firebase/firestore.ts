@@ -18,7 +18,7 @@ import {
   collectionGroup,
   setDoc,
 } from 'firebase/firestore';
-import type { Snippet, SnippetCategory, UserSubCategory, UserCounts, ChangelogEntry, ChangelogEntryData } from '@/types';
+import type { Snippet, SnippetCategory, UserSubCategory, UserCounts } from '@/types';
 import { db } from './config';
 import type { SnippetFormValues } from '@/components/snippets/snippet-form-dialog';
 
@@ -96,27 +96,6 @@ const userCountsConverter = {
   }
 };
 
-// Changelog converter
-const changelogConverter = {
-  toFirestore: (data: ChangelogEntryData) => {
-    return {
-      ...data,
-      // Convert date string back to Firestore Timestamp for storing
-      date: Timestamp.fromDate(new Date(data.date)),
-    };
-  },
-  fromFirestore: (snapshot: any, options: any): ChangelogEntry => {
-    const data = snapshot.data(options);
-    return {
-      id: snapshot.id,
-      version: data.version,
-      // Convert Firestore Timestamp to a simple date string (e.g., "YYYY-MM-DD")
-      date: (data.date as Timestamp).toDate().toISOString().split('T')[0],
-      changes: data.changes,
-    };
-  },
-};
-
 const getSnippetsCollection = (userId: string) => {
   return collection(db, 'users', userId, 'snippets').withConverter(snippetConverter);
 };
@@ -128,11 +107,6 @@ const getDefinedSubCategoriesCollection = (userId: string) => {
 const getUserCountsDocRef = (userId: string) => {
   return doc(db, 'users', userId, 'metadata', 'counts').withConverter(userCountsConverter);
 };
-
-const getChangelogsCollection = () => {
-  return collection(db, 'changelogs').withConverter(changelogConverter);
-};
-
 
 export async function addSnippetToFirestore(
   userId: string,
@@ -321,40 +295,4 @@ export async function getCurrentSnippetCount(userId: string): Promise<number> {
     console.error("Error fetching snippet count:", error);
     return 0; // Return 0 or handle error as appropriate
   }
-}
-
-// --- Changelog Functions ---
-
-export async function getChangelogs(): Promise<ChangelogEntry[]> {
-  const changelogsCol = getChangelogsCollection();
-  // Order by version string in descending order. Firestore handles semantic version strings well.
-  const q = query(changelogsCol, orderBy('version', 'desc'));
-  const snapshot = await getDocs(q);
-  return snapshot.docs.map(doc => doc.data());
-}
-
-// The functions below are no longer needed for the UI, but are kept for reference or potential future use.
-// They are not exported to prevent accidental use in the app.
-
-async function addChangelog(data: any): Promise<void> {
-  const changelogsCol = getChangelogsCollection();
-  await addDoc(changelogsCol, {
-    version: data.version,
-    date: data.date.toISOString().split('T')[0], // Store as YYYY-MM-DD
-    changes: data.changes.map((c: any) => c.value),
-  });
-}
-
-async function updateChangelog(id: string, data: any): Promise<void> {
-  const changelogDoc = doc(db, 'changelogs', id).withConverter(changelogConverter);
-  await updateDoc(changelogDoc, {
-    version: data.version,
-    date: data.date.toISOString().split('T')[0], // Store as YYYY-MM-DD
-    changes: data.changes.map((c: any) => c.value),
-  });
-}
-
-async function deleteChangelog(id: string): Promise<void> {
-  const changelogDoc = doc(db, 'changelogs', id);
-  await deleteDoc(changelogDoc);
 }
