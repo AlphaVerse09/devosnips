@@ -5,6 +5,7 @@ import type { SnippetCategory } from "@/types";
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@/components/ui/sidebar";
 import { ListFilter, CodeSquare, Palette, FileCode2, FileQuestion, Database, FileText, LayoutGrid, Type, Code, ChevronDown, ChevronUp } from "lucide-react";
 import React, { useState } from 'react';
+import { Button } from "@/components/ui/button";
 
 interface MainCategoryNavProps {
   activeMainCategory: string; 
