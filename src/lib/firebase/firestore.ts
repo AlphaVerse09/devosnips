@@ -23,7 +23,7 @@ import { db } from './config';
 import type { SnippetFormValues } from '@/components/snippets/snippet-form-dialog';
 
 
-export const MAX_SNIPPETS_PER_USER = 40; // Define the general limit
+export const MAX_SNIPPETS_PER_USER = 50; // Define the general limit
 export const ADMIN_MAX_SNIPPETS = 75; // Define the admin limit
 
 // --- Admin Configuration ---
