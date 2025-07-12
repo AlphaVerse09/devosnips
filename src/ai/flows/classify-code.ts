@@ -1,5 +1,4 @@
 
-// This is an auto-generated file from Firebase Studio.
 'use server';
 
 /**
@@ -20,7 +19,7 @@ export type ClassifyCodeInput = z.infer<typeof ClassifyCodeInputSchema>;
 
 const ClassifyCodeOutputSchema = z.object({
   category: z
-    .enum(['HTML', 'CSS', 'JavaScript', 'Python', 'SQL', 'React', 'TypeScript', 'C#', 'Other'])
+    .enum(['HTML', 'CSS', 'JavaScript', 'Python', 'SQL', 'React', 'TypeScript', 'C#', 'Java', 'Go', 'PHP', 'C++', 'Kotlin', 'Rust', 'Swift', 'Angular', 'Vue', 'Other'])
     .describe('The category of the code snippet.'),
 });
 export type ClassifyCodeOutput = z.infer<typeof ClassifyCodeOutputSchema>;
@@ -33,9 +32,11 @@ const prompt = ai.definePrompt({
   name: 'classifyCodePrompt',
   input: {schema: ClassifyCodeInputSchema},
   output: {schema: ClassifyCodeOutputSchema},
-  prompt: `You are an expert code classifier. Given a code snippet, you will classify it into one of the following categories: HTML, CSS, JavaScript, Python, SQL, React, TypeScript, C#, or Other.
+  prompt: `You are an expert code classifier. Given a code snippet, you will classify it into one of the following categories: HTML, CSS, JavaScript, Python, SQL, React, TypeScript, C#, Java, Go, PHP, C++, Kotlin, Rust, Swift, Angular, Vue, or Other.
 
-Consider React and TypeScript as primary categories if the code is clearly identifiable as such. For generic C-family syntax that isn't clearly C#, or for other languages not listed, use 'Other'.
+- Prioritize specific frameworks like React, Angular, and Vue if they are clearly identifiable.
+- For generic C-family syntax, prefer C++.
+- For anything else not on the list, use 'Other'.
 
 Code: {{{code}}}`,
 });
@@ -51,4 +52,3 @@ const classifyCodeFlow = ai.defineFlow(
     return output!;
   }
 );
-

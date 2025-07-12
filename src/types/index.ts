@@ -1,5 +1,5 @@
 
-export type SnippetCategory = 'HTML' | 'CSS' | 'JavaScript' | 'Python' | 'SQL' | 'React' | 'TypeScript' | 'C#' | 'Other';
+export type SnippetCategory = 'HTML' | 'CSS' | 'JavaScript' | 'Python' | 'SQL' | 'React' | 'TypeScript' | 'C#' | 'Java' | 'Go' | 'PHP' | 'C++' | 'Kotlin' | 'Rust' | 'Swift' | 'Angular' | 'Vue' | 'Other';
 
 export interface Snippet {
   id: string;
@@ -26,5 +26,3 @@ export interface UserCounts {
   // subCategory_HTML_Count?: number;
   // subCategory_CSS_Count?: number;
 }
-
-    

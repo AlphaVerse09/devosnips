@@ -30,7 +30,7 @@ const snippetFormSchema = z.object({
   title: z.string().min(1, "Title is required").max(100, "Title must be 100 characters or less"),
   description: z.string().max(500, "Description must be 500 characters or less").optional(),
   code: z.string().min(1, "Code is required"),
-  manualCategory: z.enum(['HTML', 'CSS', 'JavaScript', 'Python', 'SQL', 'React', 'TypeScript', 'C#', 'Other']).optional(),
+  manualCategory: z.enum(['HTML', 'CSS', 'JavaScript', 'Python', 'SQL', 'React', 'TypeScript', 'C#', 'Java', 'Go', 'PHP', 'C++', 'Kotlin', 'Rust', 'Swift', 'Angular', 'Vue', 'Other']).optional(),
   subCategoryName: z.string().max(100).optional(),
   newSubCategoryName: z.string().max(100).optional(),
 });
@@ -51,7 +51,7 @@ interface SnippetFormDialogProps {
   maxSnippets: number; // For client-side UX
 }
 
-const mainCategories: SnippetCategory[] = ['HTML', 'CSS', 'JavaScript', 'React', 'TypeScript', 'Python', 'C#', 'SQL', 'Other'];
+const mainCategories: SnippetCategory[] = ['HTML', 'CSS', 'JavaScript', 'React', 'TypeScript', 'Python', 'C#', 'SQL', 'Java', 'Go', 'PHP', 'C++', 'Kotlin', 'Rust', 'Swift', 'Angular', 'Vue', 'Other'];
 const NO_SUBCATEGORY_VALUE = "___NONE___";
 
 export function SnippetFormDialog({ isOpen, onOpenChange, snippet, onSubmitSuccess, currentSnippetCount, maxSnippets }: SnippetFormDialogProps) {
@@ -349,5 +349,3 @@ export function SnippetFormDialog({ isOpen, onOpenChange, snippet, onSubmitSucce
     </Dialog>
   );
 }
-
-    
