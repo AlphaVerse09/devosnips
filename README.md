@@ -1,5 +1,3 @@
-firebase projects:list# DevoSnips
-
 A smart code snippet manager built to help developers save, organize, and find their code with ease.
 
 ## Key Features

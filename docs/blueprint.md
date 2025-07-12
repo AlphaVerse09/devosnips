@@ -1,5 +1,5 @@
 # **App Name**: DevoSnips
-
+ 
 ## Core Features:
 
 - Add Snippet: Enable users to add new code snippets with a title, optional description, code content (HTML, CSS, JavaScript), and category.

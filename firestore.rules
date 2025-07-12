@@ -1,4 +1,4 @@
-
+ 
 rules_version = '2';
 
 // Helper function to check if a user is an admin.
