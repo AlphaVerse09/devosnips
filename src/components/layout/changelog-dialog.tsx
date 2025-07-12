@@ -51,7 +51,8 @@ export function ChangelogDialog({ isOpen, onOpenChange, isAdmin }: ChangelogDial
       setChangelogs(logs);
     } catch (error) {
       console.error("Error fetching changelogs:", error);
-      toast({ title: "Error", description: "Could not load release notes.", variant: "destructive" });
+      // Only show toast on actual error, not for empty list
+      toast({ title: "Error", description: "Could not load release notes. Please check your connection.", variant: "destructive" });
     } finally {
       setIsLoading(false);
     }

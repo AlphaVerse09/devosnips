@@ -3,24 +3,25 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // Helper functions
-    function isAdmin(userId) {
-      // vfGb4jXfBsZA79t3QFk2nScFmw92 is the ADMIN_USER_ID from firestore.ts
-      return userId == 'vfGb4jXfBsZA79t3QFk2nScFmw92';
-    }
-
-    // Snippets Rules
+    
+    // User-specific data
     match /users/{userId}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, write, delete: if request.auth != null && request.auth.uid == userId;
     }
 
-    // Changelogs Rules
-    // Allow anyone authenticated to read.
-    // Only allow the admin to create, update, or delete.
+    // Changelogs collection
     match /changelogs/{changelogId} {
+      // Allow all authenticated users to read changelogs
       allow read: if request.auth != null;
-      allow write: if request.auth != null && isAdmin(request.auth.uid);
+      
+      // Only allow admins to write/update/delete changelogs
+      allow write, update, delete: if canAdminChangelogs(request.auth.uid);
     }
   }
+}
+
+// Helper function to check if a user is an admin
+function canAdminChangelogs(uid) {
+  // Admin UIDs are stored in an array
+  return uid in ['vfGb4jXfBsZA79t3QFk2nScFmw92'];
 }
