@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { SidebarTrigger } from '@/components/ui/sidebar'; // Import SidebarTrigger
+import { Logo } from '../logo';
 
 interface AppHeaderProps {
   onAddSnippet: () => void;
@@ -35,60 +36,7 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
       <div className="flex h-16 items-center px-4"> {/* Changed px-8 to px-4 */}
         <SidebarTrigger className="mr-2 md:hidden" /> {/* Sidebar trigger for mobile */}
         <Link href="/" className="mr-auto flex items-center space-x-2">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7"
-          >
-            <g className="text-foreground">
-              <path
-                d="M15.2859 13.0714L18.8573 16.6428"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M15.2859 16.6428L18.8573 13.0714"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <circle
-                cx="13.7144"
-                cy="11.5"
-                r="1.57143"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-              <circle
-                cx="13.7144"
-                cy="18.2143"
-                r="1.57143"
-                stroke="currentColor"
-                strokeWidth="1.5"
-              />
-            </g>
-            <rect x="2" y="4" width="16" height="16" rx="4" className="fill-primary" />
-            <path
-              d="M7 10L5 12L7 14"
-              stroke="hsl(var(--primary-foreground))"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M11 10L13 12L11 14"
-              stroke="hsl(var(--primary-foreground))"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Logo className="h-7 w-7" />
           <span className="font-bold font-headline text-xl">DevoSnips</span>
         </Link>
         <nav className="flex items-center space-x-2">
