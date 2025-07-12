@@ -12,7 +12,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { SidebarTrigger } from '@/components/ui/sidebar'; // Import SidebarTrigger
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface AppHeaderProps {
   onAddSnippet: () => void;
@@ -33,19 +34,27 @@ export function AppHeader({ onAddSnippet, onShowChangelog, onSignOut, userEmail 
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex h-16 items-center px-4"> {/* Changed px-8 to px-4 */}
-        <SidebarTrigger className="mr-2 md:hidden" /> {/* Sidebar trigger for mobile */}
+      <div className="flex h-16 items-center px-4">
+        <SidebarTrigger className="mr-2 md:hidden" />
         <Link href="/" className="mr-auto flex items-center space-x-2">
           <span className="font-bold font-headline text-xl">DevoSnips</span>
         </Link>
-        <nav className="flex items-center space-x-2">
+        <nav className="flex items-center space-x-1 sm:space-x-2">
           {userEmail && (
             <>
-              <Button onClick={onShowChangelog} variant="outline" className="hidden sm:inline-flex">
-                <BookText className="mr-2 h-4 w-4" />
-                Changelog
-              </Button>
-              <Button onClick={onAddSnippet} variant="outline">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button onClick={onShowChangelog} variant="ghost" size="icon" className="hidden sm:inline-flex">
+                    <BookText className="h-5 w-5" />
+                    <span className="sr-only">Changelog</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Changelog</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Button onClick={onAddSnippet} variant="outline" className="h-9">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add Snippet
               </Button>
