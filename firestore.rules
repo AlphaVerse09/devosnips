@@ -2,29 +2,26 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-  
-    // --- Helper Functions ---
-    // Checks if a user's UID matches the designated admin UID.
-    function isAdmin(userId) {
-      return userId == 'TD7UkyNpawhnTZfKunrsbjycqHV2';
+
+    // Helper function to check if the requesting user is an admin.
+    function isAdmin() {
+      // Compare the requesting user's UID to the hardcoded admin UID.
+      return request.auth.uid == 'TD7UkyNpawhnTZfKunrsbjycqHV2';
     }
 
-    // --- User Data Rules ---
-    // Secures the 'users' collection.
-    match /users/{userId}/{document=**} {
-      // Users can only read/write their own data.
-      // Admins can read anyone's data but cannot write to it (to prevent accidental changes).
-      allow read: if request.auth.uid == userId || isAdmin(request.auth.uid);
-      allow write: if request.auth.uid == userId;
-    }
-
-    // --- Changelog Rules ---
-    // Manages access to the 'changelogs' collection for release notes.
-    match /changelogs/{logId} {
+    // Rules for the 'changelogs' collection
+    match /changelogs/{changelogId} {
       // Any authenticated user can read the changelogs.
       allow read: if request.auth != null;
-      // ONLY the designated admin can create, update, or delete changelogs.
-      allow write: if isAdmin(request.auth.uid);
+      
+      // Only the admin can create, update, or delete changelogs.
+      allow write: if isAdmin();
+    }
+    
+    // Rules for all documents within a specific user's folder
+    match /users/{userId}/{document=**} {
+      // A user can read and write to their own documents. The admin can also read/write.
+      allow read, write: if request.auth.uid == userId || isAdmin();
     }
   }
 }
