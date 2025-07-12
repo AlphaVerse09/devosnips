@@ -325,38 +325,6 @@ export async function getCurrentSnippetCount(userId: string): Promise<number> {
 
 // --- Changelog Functions ---
 
-// This function will add/update a changelog entry. It's intended for internal/dev use.
-async function seedChangelog() {
-  const changelogsCol = getChangelogsCollection();
-  const today = new Date().toISOString().split('T')[0];
-
-  const changelogData = {
-    version: '1.1',
-    date: today,
-    changes: [
-      'Fixed code highlight issues.',
-      'Removed logo from topbar.',
-      'Added a "view" button for easy view on snippets.',
-      'Added more languages.',
-      'Replaced current language icons with their real icons.',
-      'Fixed a few bugs.'
-    ]
-  };
-
-  try {
-    // Use the version number as the document ID for easy updating
-    const changelogDocRef = doc(changelogsCol, changelogData.version);
-    await setDoc(changelogDocRef, changelogData);
-    console.log(`Changelog v${changelogData.version} has been seeded.`);
-  } catch (error) {
-    console.error("Error seeding changelog:", error);
-  }
-}
-
-// Uncomment the line below to run the seed function once during development startup.
-// Make sure to comment it out again after it has run to avoid writing it on every server restart.
-seedChangelog();
-
 export async function getChangelogs(): Promise<ChangelogEntry[]> {
   const changelogsCol = getChangelogsCollection();
   // Order by version string in descending order. Firestore handles semantic version strings well.
