@@ -35,9 +35,15 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
       <div className="flex h-16 items-center px-4"> {/* Changed px-8 to px-4 */}
         <SidebarTrigger className="mr-2 md:hidden" /> {/* Sidebar trigger for mobile */}
         <Link href="/" className="mr-auto flex items-center space-x-2">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-primary">
-            <polyline points="16 18 22 12 16 6"></polyline>
-            <polyline points="8 6 2 12 8 18"></polyline>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-7 w-7">
+              <rect x="2" y="4" width="16" height="16" rx="4" className="fill-primary"/>
+              <path d="M7 10L5 12L7 14" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M11 10L13 12L11 14" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <g className="text-foreground">
+                  <circle cx="15.5" cy="17.5" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                  <circle cx="15.5" cy="7.5" r="2" stroke="currentColor" strokeWidth="1.5"/>
+                  <path d="M15.5 9.5V12M15.5 15.5V12M15.5 12H19L22 4M15.5 12H12L9 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </g>
           </svg>
           <span className="font-bold font-headline text-xl">DevoSnips</span>
         </Link>
