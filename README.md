@@ -22,3 +22,6 @@ A smart code snippet manager built to help developers save, organize, and find t
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) & [ShadCN UI](https://ui.shadcn.com/)
 - **AI Backend**: [Firebase Genkit](https://firebase.google.com/docs/genkit)
 - **Database & Auth**: [Firebase](https://firebase.google.com/) (Firestore & Authentication)
+
+## Changelog
+See the [Changelog](./CHANGELOG.md) file for details.
