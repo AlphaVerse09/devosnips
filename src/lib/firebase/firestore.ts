@@ -16,11 +16,11 @@ import {
   runTransaction,
   increment,
   collectionGroup,
+  setDoc,
 } from 'firebase/firestore';
 import type { Snippet, SnippetCategory, UserSubCategory, UserCounts, ChangelogEntry, ChangelogEntryData } from '@/types';
 import { db } from './config';
 import type { SnippetFormValues } from '@/components/snippets/snippet-form-dialog';
-import type { ChangelogFormValues } from '@/components/layout/changelog-form-dialog';
 
 
 export const MAX_SNIPPETS_PER_USER = 40; // Define the general limit
@@ -325,6 +325,38 @@ export async function getCurrentSnippetCount(userId: string): Promise<number> {
 
 // --- Changelog Functions ---
 
+// This function will add/update a changelog entry. It's intended for internal/dev use.
+async function seedChangelog() {
+  const changelogsCol = getChangelogsCollection();
+  const today = new Date().toISOString().split('T')[0];
+
+  const changelogData = {
+    version: '1.1',
+    date: today,
+    changes: [
+      'Fixed code highlight issues.',
+      'Removed logo from topbar.',
+      'Added a "view" button for easy view on snippets.',
+      'Added more languages.',
+      'Replaced current language icons with their real icons.',
+      'Fixed a few bugs.'
+    ]
+  };
+
+  try {
+    // Use the version number as the document ID for easy updating
+    const changelogDocRef = doc(changelogsCol, changelogData.version);
+    await setDoc(changelogDocRef, changelogData);
+    console.log(`Changelog v${changelogData.version} has been seeded.`);
+  } catch (error) {
+    console.error("Error seeding changelog:", error);
+  }
+}
+
+// Uncomment the line below to run the seed function once during development startup.
+// Make sure to comment it out again after it has run to avoid writing it on every server restart.
+// seedChangelog();
+
 export async function getChangelogs(): Promise<ChangelogEntry[]> {
   const changelogsCol = getChangelogsCollection();
   // Order by version string in descending order. Firestore handles semantic version strings well.
@@ -333,25 +365,28 @@ export async function getChangelogs(): Promise<ChangelogEntry[]> {
   return snapshot.docs.map(doc => doc.data());
 }
 
-export async function addChangelog(data: ChangelogFormValues): Promise<void> {
+// The functions below are no longer needed for the UI, but are kept for reference or potential future use.
+// They are not exported to prevent accidental use in the app.
+
+async function addChangelog(data: any): Promise<void> {
   const changelogsCol = getChangelogsCollection();
   await addDoc(changelogsCol, {
     version: data.version,
     date: data.date.toISOString().split('T')[0], // Store as YYYY-MM-DD
-    changes: data.changes.map(c => c.value),
+    changes: data.changes.map((c: any) => c.value),
   });
 }
 
-export async function updateChangelog(id: string, data: ChangelogFormValues): Promise<void> {
+async function updateChangelog(id: string, data: any): Promise<void> {
   const changelogDoc = doc(db, 'changelogs', id).withConverter(changelogConverter);
   await updateDoc(changelogDoc, {
     version: data.version,
     date: data.date.toISOString().split('T')[0], // Store as YYYY-MM-DD
-    changes: data.changes.map(c => c.value),
+    changes: data.changes.map((c: any) => c.value),
   });
 }
 
-export async function deleteChangelog(id: string): Promise<void> {
+async function deleteChangelog(id: string): Promise<void> {
   const changelogDoc = doc(db, 'changelogs', id);
   await deleteDoc(changelogDoc);
 }
