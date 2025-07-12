@@ -27,7 +27,7 @@ import { Loader2 } from 'lucide-react';
 import { auth } from '@/lib/firebase/config';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { SidebarProvider, Sidebar, SidebarContent, SidebarInset, SidebarHeader, SidebarTrigger, SidebarRail } from '@/components/ui/sidebar';
+import { SidebarProvider, Sidebar, SidebarContent, SidebarInset, SidebarHeader, SidebarTrigger } from '@/components/ui/sidebar';
 import { MainCategoryNav } from '@/components/layout/main-category-nav';
 import { SubcategoryNav } from '@/components/snippets/subcategory-nav';
 import { AddSubcategoryDialog } from '@/components/snippets/add-subcategory-dialog';
@@ -289,7 +289,6 @@ export default function HomePage() {
         <AppHeader onAddSnippet={handleAddSnippetClick} onSignOut={handleSignOut} userEmail={user?.email} />
         <div className="flex flex-1">
           <Sidebar collapsible="icon" className="border-r" side="left">
-            <SidebarRail />
             <SidebarContent>
               <SidebarHeader className="p-2 pt-4">
                 <h2 className="text-lg font-semibold font-headline px-2">Categories</h2>
@@ -307,7 +306,7 @@ export default function HomePage() {
           </Sidebar>
 
           <SidebarInset>
-            <main className="flex flex-1 flex-col p-3 sm:p-4 md:p-6 space-y-6">
+            <main className="flex-1 flex flex-col p-3 sm:p-4 md:p-6 space-y-6">
               <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between p-4 rounded-lg border bg-card shadow-sm">
                 <SearchBar currentSearch={searchTerm} onSearchChange={setSearchTerm} className="w-full md:w-auto md:flex-1 md:max-w-md" />
                 <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -378,3 +377,5 @@ export default function HomePage() {
     </SidebarProvider>
   );
 }
+
+    
