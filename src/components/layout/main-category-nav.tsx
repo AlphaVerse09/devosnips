@@ -61,7 +61,7 @@ export function MainCategoryNav({ activeMainCategory, onSelectMainCategory }: Ma
         <div className="px-4 py-2">
             <Button
             variant="ghost"
-            className="w-full justify-start text-sm"
+            className="w-full justify-start text-xs h-8 text-muted-foreground hover:bg-transparent hover:text-foreground"
             onClick={() => setIsExpanded(!isExpanded)}
             >
             {isExpanded ? <ChevronUp className="mr-2 h-4 w-4" /> : <ChevronDown className="mr-2 h-4 w-4" />}
