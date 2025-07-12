@@ -19,6 +19,9 @@ export function SnippetList({ snippets, onEdit, onDelete }: SnippetListProps) {
           <ShieldAlert className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
           <h3 className="text-2xl font-bold tracking-tight font-headline">No Snippets Found</h3>
           <p className="text-sm text-muted-foreground">Try adding a new snippet or adjusting your filters.</p>
+          <p className="text-xs text-muted-foreground mt-4 italic">
+            There is a bug that makes website shrink when there is no snippets, after adding a snippet it gets fixed.
+          </p>
         </div>
       </div>
     );
