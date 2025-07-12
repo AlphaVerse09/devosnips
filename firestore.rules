@@ -2,26 +2,29 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    
-    // Helper function to check if the requesting user's UID is in the admin list.
-    function isAdmin() {
-      return request.auth.uid in ['TD7UkyNpawhnTZfKunrsbjycqHV2'];
+  
+    // --- Helper Functions ---
+    // Checks if a user's UID matches the designated admin UID.
+    function isAdmin(userId) {
+      return userId == 'TD7UkyNpawhnTZfKunrsbjycqHV2';
     }
 
-    // Rules for user-specific data (snippets, subcategories, etc.)
-    match /users/{userId}/{documents=**} {
-      // A user can read and write to their own documents.
-      // An admin can also read any user's documents (but not write, for safety).
-      allow read: if request.auth.uid == userId || isAdmin();
+    // --- User Data Rules ---
+    // Secures the 'users' collection.
+    match /users/{userId}/{document=**} {
+      // Users can only read/write their own data.
+      // Admins can read anyone's data but cannot write to it (to prevent accidental changes).
+      allow read: if request.auth.uid == userId || isAdmin(request.auth.uid);
       allow write: if request.auth.uid == userId;
     }
 
-    // Rules for public changelogs
-    match /changelogs/{changelogId} {
+    // --- Changelog Rules ---
+    // Manages access to the 'changelogs' collection for release notes.
+    match /changelogs/{logId} {
       // Any authenticated user can read the changelogs.
       allow read: if request.auth != null;
-      // Only admins can create, update, or delete changelogs.
-      allow write: if isAdmin();
+      // ONLY the designated admin can create, update, or delete changelogs.
+      allow write: if isAdmin(request.auth.uid);
     }
   }
 }
