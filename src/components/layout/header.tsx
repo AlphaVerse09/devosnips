@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { SidebarTrigger } from '@/components/ui/sidebar'; // Import SidebarTrigger
-import { Logo } from '../logo';
 
 interface AppHeaderProps {
   onAddSnippet: () => void;
@@ -36,7 +35,6 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
       <div className="flex h-16 items-center px-4"> {/* Changed px-8 to px-4 */}
         <SidebarTrigger className="mr-2 md:hidden" /> {/* Sidebar trigger for mobile */}
         <Link href="/" className="mr-auto flex items-center space-x-2">
-          <Logo className="h-7 w-7" />
           <span className="font-bold font-headline text-xl">DevoSnips</span>
         </Link>
         <nav className="flex items-center space-x-2">
