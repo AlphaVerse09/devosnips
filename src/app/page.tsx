@@ -20,7 +20,7 @@ import {
   SnippetLimitError, 
   MAX_SNIPPETS_PER_USER,
   ADMIN_MAX_SNIPPETS,
-  ADMIN_USER_ID,
+  ADMIN_USER_IDS,
   getCurrentSnippetCount
 } from '@/lib/firebase/firestore';
 import { Loader2 } from 'lucide-react';
@@ -72,7 +72,7 @@ export default function HomePage() {
 
   const { toast } = useToast();
 
-  const isAdmin = useMemo(() => user?.uid === ADMIN_USER_ID, [user]);
+  const isAdmin = useMemo(() => user ? ADMIN_USER_IDS.includes(user.uid) : false, [user]);
 
   const effectiveMaxSnippets = useMemo(() => {
     return isAdmin ? ADMIN_MAX_SNIPPETS : MAX_SNIPPETS_PER_USER;

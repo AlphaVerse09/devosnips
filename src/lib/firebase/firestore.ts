@@ -27,10 +27,8 @@ export const MAX_SNIPPETS_PER_USER = 40; // Define the general limit
 export const ADMIN_MAX_SNIPPETS = 75; // Define the admin limit
 
 // --- Admin Configuration ---
-// Replace 'YOUR_ADMIN_USER_ID_HERE' with your actual Firebase User ID
-// to give that account higher snippet limits.
-// User has confirmed they replaced this:
-export const ADMIN_USER_ID = 'vfGb4jXfBsZA79t3QFk2nScFmw92'; 
+// Add your Firebase User IDs here to grant admin privileges.
+export const ADMIN_USER_IDS = ['vfGb4jXfBsZA79t3QFk2nScFmw92', '1q1p9vFHNmdbQ63xJXf6Glb0z5E3']; 
 // -------------------------
 
 // Custom error for snippet limit
@@ -145,15 +143,16 @@ export async function addSnippetToFirestore(
   const snippetsCol = getSnippetsCollection(userId);
   const userCountsRef = getUserCountsDocRef(userId);
   const newSnippetRef = doc(snippetsCol); 
+  const isAdmin = ADMIN_USER_IDS.includes(userId);
 
   await runTransaction(db, async (transaction) => {
     // READ operation: Get the current snippet count
     const countsDoc = await transaction.get(userCountsRef);
     const currentSnippetCount = countsDoc.data()?.snippetCount || 0;
 
-    const applicableLimit = userId === ADMIN_USER_ID ? ADMIN_MAX_SNIPPETS : MAX_SNIPPETS_PER_USER;
+    const applicableLimit = isAdmin ? ADMIN_MAX_SNIPPETS : MAX_SNIPPETS_PER_USER;
 
-    if (currentSnippetCount >= applicableLimit && userId !== ADMIN_USER_ID) {
+    if (currentSnippetCount >= applicableLimit) {
       throw new SnippetLimitError(`You have reached the maximum limit of ${applicableLimit} snippets.`);
     }
     
