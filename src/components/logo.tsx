@@ -23,37 +23,37 @@ export function Logo({ className }: { className?: string }) {
           className={className}
         >
           <g clipPath="url(#clip0_303_3)">
-            <rect x="2" y="4" width="16" height="16" rx="4" fill="hsl(var(--primary))" />
+            <rect x="2" y="4" width="16" height="16" rx="4" fill="#2E9AFE" />
             <path
               d="M7 10L5 12L7 14"
-              stroke="hsl(var(--primary-foreground))"
+              stroke="#F0F2F5"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M11 10L13 12L11 14"
-              stroke="hsl(var(--primary-foreground))"
+              stroke="#F0F2F5"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M15.2859 13.0714L18.8573 16.6428"
-              stroke="hsl(var(--primary-foreground))"
+              stroke="#F0F2F5"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M15.2859 16.6428L18.8573 13.0714"
-              stroke="hsl(var(--primary-foreground))"
+              stroke="#F0F2F5"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx="13.7144" cy="11.5" r="1.57143" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" />
-            <circle cx="13.7144" cy="18.2143" r="1.57143" stroke="hsl(var(--primary-foreground))" strokeWidth="1.5" />
+            <circle cx="13.7144" cy="11.5" r="1.57143" stroke="#F0F2F5" strokeWidth="1.5" />
+            <circle cx="13.7144" cy="18.2143" r="1.57143" stroke="#F0F2F5" strokeWidth="1.5" />
           </g>
           <defs>
             <clipPath id="clip0_303_3">
@@ -75,37 +75,37 @@ export function Logo({ className }: { className?: string }) {
         className={className}
       >
         <g clipPath="url(#clip0_303_2)">
-          <rect x="2" y="4" width="16" height="16" rx="4" fill="hsl(var(--primary))" />
+          <rect x="2" y="4" width="16" height="16" rx="4" fill="#2E9AFE" />
           <path
             d="M7 10L5 12L7 14"
-            stroke="hsl(var(--primary-foreground))"
+            stroke="white"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M11 10L13 12L11 14"
-            stroke="hsl(var(--primary-foreground))"
+            stroke="white"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M15.2859 13.0714L18.8573 16.6428"
-            stroke="hsl(var(--card-foreground))"
+            stroke="#282C34"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           <path
             d="M15.2859 16.6428L18.8573 13.0714"
-            stroke="hsl(var(--card-foreground))"
+            stroke="#282C34"
             strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <circle cx="13.7144" cy="11.5" r="1.57143" stroke="hsl(var(--card-foreground))" strokeWidth="1.5" />
-          <circle cx="13.7144" cy="18.2143" r="1.57143" stroke="hsl(var(--card-foreground))" strokeWidth="1.5" />
+          <circle cx="13.7144" cy="11.5" r="1.57143" stroke="#282C34" strokeWidth="1.5" />
+          <circle cx="13.7144" cy="18.2143" r="1.57143" stroke="#282C34" strokeWidth="1.5" />
         </g>
         <defs>
           <clipPath id="clip0_303_2">
