@@ -83,3 +83,5 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
     </header>
   );
 }
+
+    

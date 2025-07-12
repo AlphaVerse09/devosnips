@@ -204,7 +204,7 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
           <p className="text-xs text-muted-foreground self-start sm:self-center">
             Last updated: {snippet.updatedAt ? formatDistanceToNow(new Date(snippet.updatedAt), { addSuffix: true }) : 'N/A'}
           </p>
-          <div className="flex gap-2 flex-wrap self-end sm:self-center">
+          <div className="flex gap-1 sm:gap-2 flex-wrap self-end sm:self-center">
             <Button variant="outline" size="sm" onClick={() => setIsViewDialogOpen(true)}>
                 <Eye className="mr-2 h-4 w-4" />
                 View
@@ -252,3 +252,5 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
     </>
   );
 }
+
+    

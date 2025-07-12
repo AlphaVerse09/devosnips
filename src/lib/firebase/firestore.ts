@@ -296,3 +296,5 @@ export async function getCurrentSnippetCount(userId: string): Promise<number> {
     return 0; // Return 0 or handle error as appropriate
   }
 }
+
+    

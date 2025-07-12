@@ -28,7 +28,7 @@ export function SnippetList({ snippets, onEdit, onDelete }: SnippetListProps) {
   }
 
   return (
-    <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
       {snippets.map((snippet) => (
         <SnippetItem
           key={snippet.id}
@@ -40,3 +40,5 @@ export function SnippetList({ snippets, onEdit, onDelete }: SnippetListProps) {
     </div>
   );
 }
+
+    

@@ -27,7 +27,7 @@ import { Loader2 } from 'lucide-react';
 import { auth } from '@/lib/firebase/config';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import { SidebarProvider, Sidebar, SidebarContent, SidebarInset, SidebarHeader, SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarProvider, Sidebar, SidebarContent, SidebarInset, SidebarHeader } from '@/components/ui/sidebar';
 import { MainCategoryNav } from '@/components/layout/main-category-nav';
 import { SubcategoryNav } from '@/components/snippets/subcategory-nav';
 import { AddSubcategoryDialog } from '@/components/snippets/add-subcategory-dialog';

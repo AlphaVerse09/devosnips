@@ -99,3 +99,5 @@ export function SnippetViewDialog({ isOpen, onOpenChange, snippet, prismTheme, l
     </Dialog>
   );
 }
+
+    
