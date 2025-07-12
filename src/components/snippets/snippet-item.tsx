@@ -14,7 +14,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { ClipboardCopy, Edit3, Trash2, FileCode2, CodeSquare, Palette, FileQuestion, FolderKanban, FileText, Database, LayoutGrid, Type, Code } from "lucide-react";
 import type { Snippet, SnippetCategory } from "@/types";
@@ -71,12 +70,20 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const { theme: activeTheme } = useTheme();
+  const { resolvedTheme } = useTheme(); // Use resolvedTheme to get the actual applied theme
   const [currentPrismTheme, setCurrentPrismTheme] = useState(prismThemes.nightOwl);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setCurrentPrismTheme(activeTheme === 'dark' ? prismThemes.nightOwl : prismThemes.nightOwlLight);
-  }, [activeTheme]);
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    // We only want to set the theme after the component has mounted to avoid hydration mismatches
+    if (isMounted) {
+      setCurrentPrismTheme(resolvedTheme === 'dark' ? prismThemes.nightOwl : prismThemes.vsLight);
+    }
+  }, [resolvedTheme, isMounted]);
 
 
   const handleCopy = async () => {
@@ -97,6 +104,32 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
 
   const CategoryIcon = categoryIcons[snippet.category] || FileQuestion;
   const MAX_PREVIEW_LINES = 5;
+
+  // Render a placeholder or null until mounted to prevent hydration errors
+  if (!isMounted) {
+    return (
+        <Card className="shadow-lg flex flex-col animate-pulse">
+             <CardHeader>
+                <div className="flex justify-between items-start gap-2">
+                    <div className="h-7 bg-muted rounded w-3/4"></div>
+                    <div className="h-6 bg-muted rounded w-1/4"></div>
+                </div>
+                <div className="h-4 bg-muted rounded w-1/2 mt-1"></div>
+            </CardHeader>
+            <CardContent className="flex-grow">
+                <div className="p-3 rounded-md bg-muted h-36"></div>
+            </CardContent>
+            <CardFooter className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-2 mt-auto">
+                 <div className="h-4 bg-muted rounded w-1/3"></div>
+                <div className="flex gap-1 sm:gap-2 flex-wrap">
+                    <div className="h-9 w-24 bg-muted rounded-md"></div>
+                    <div className="h-9 w-20 bg-muted rounded-md"></div>
+                    <div className="h-9 w-24 bg-muted rounded-md"></div>
+                </div>
+            </CardFooter>
+        </Card>
+    );
+  }
 
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
@@ -189,7 +222,7 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleDeleteConfirm}>
+                <AlertDialogAction onClick={handleDeleteConfirm} className="bg-destructive hover:bg-destructive/90">
                   Delete
                 </AlertDialogAction>
               </AlertDialogFooter>
