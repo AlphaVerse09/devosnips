@@ -125,3 +125,5 @@ export function MainCategoryNav({ activeMainCategory, onSelectMainCategory }: Ma
     </>
   );
 }
+
+    

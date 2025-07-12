@@ -49,7 +49,7 @@ const PHPIcon = () => (
 
 const CppIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-4 h-4">
-        <text x="2" y="18" fontFamily="monospace" fontSize="18" fill="currentColor">C++</text>
+       <text x="2" y="18" fontFamily="monospace" fontSize="18" fill="currentColor">C++</text>
     </svg>
 );
 
@@ -323,3 +323,5 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
     </>
   );
 }
+
+    
