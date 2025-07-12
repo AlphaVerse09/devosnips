@@ -28,7 +28,7 @@ export const ADMIN_MAX_SNIPPETS = 75; // Define the admin limit
 
 // --- Admin Configuration ---
 // Add your Firebase User IDs here to grant admin privileges.
-export const ADMIN_USER_IDS = ['vfGb4jXfBsZA79t3QFk2nScFmw92']; 
+export const ADMIN_USER_IDS = ['TD7UkyNpawhnTZfKunrsbjycqHV2']; 
 // -------------------------
 
 // Custom error for snippet limit
