@@ -19,8 +19,8 @@ import {
   deleteSnippetFromFirestore,
   SnippetLimitError, 
   MAX_SNIPPETS_PER_USER,
-  ADMIN_MAX_SNIPPETS, // Import admin limit
-  ADMIN_USER_ID,      // Import admin UID
+  ADMIN_MAX_SNIPPETS,
+  ADMIN_USER_ID,
   getCurrentSnippetCount
 } from '@/lib/firebase/firestore';
 import { Loader2 } from 'lucide-react';
@@ -72,9 +72,11 @@ export default function HomePage() {
 
   const { toast } = useToast();
 
+  const isAdmin = useMemo(() => user?.uid === ADMIN_USER_ID, [user]);
+
   const effectiveMaxSnippets = useMemo(() => {
-    return user?.uid === ADMIN_USER_ID ? ADMIN_MAX_SNIPPETS : MAX_SNIPPETS_PER_USER;
-  }, [user]);
+    return isAdmin ? ADMIN_MAX_SNIPPETS : MAX_SNIPPETS_PER_USER;
+  }, [isAdmin]);
 
   const fetchUserSnippetCount = useCallback(async () => {
     if (!user) return;
@@ -357,7 +359,11 @@ export default function HomePage() {
           </SidebarInset>
         </div>
       </div>
-      <ChangelogDialog isOpen={isChangelogOpen} onOpenChange={setIsChangelogOpen} />
+      <ChangelogDialog 
+        isOpen={isChangelogOpen} 
+        onOpenChange={setIsChangelogOpen}
+        isAdmin={isAdmin}
+      />
       <SnippetFormDialog
         isOpen={isFormOpen}
         onOpenChange={setIsFormOpen}

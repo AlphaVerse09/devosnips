@@ -26,3 +26,20 @@ export interface UserCounts {
   // subCategory_HTML_Count?: number;
   // subCategory_CSS_Count?: number;
 }
+
+// --- Changelog Types ---
+
+// The data structure for a changelog entry fetched from Firestore
+export interface ChangelogEntry {
+  id: string;
+  version: string;
+  date: string; // Stored as YYYY-MM-DD string
+  changes: string[];
+}
+
+// The data structure used when writing to Firestore (before conversion)
+export interface ChangelogEntryData {
+  version: string;
+  date: string; // YYYY-MM-DD string
+  changes: string[];
+}
