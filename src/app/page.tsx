@@ -31,6 +31,7 @@ import { SidebarProvider, Sidebar, SidebarContent, SidebarInset, SidebarHeader, 
 import { MainCategoryNav } from '@/components/layout/main-category-nav';
 import { SubcategoryNav } from '@/components/snippets/subcategory-nav';
 import { AddSubcategoryDialog } from '@/components/snippets/add-subcategory-dialog';
+import { ChangelogDialog } from '@/components/layout/changelog-dialog';
 
 
 type SortOption =
@@ -64,6 +65,7 @@ export default function HomePage() {
   const [editingSnippet, setEditingSnippet] = useState<Snippet | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isAddSubCategoryDialogOpen, setIsAddSubCategoryDialogOpen] = useState(false);
+  const [isChangelogOpen, setIsChangelogOpen] = useState(false);
   const [forceSubCategoryNavRefresh, setForceSubCategoryNavRefresh] = useState(0);
   const [currentSnippetCount, setCurrentSnippetCount] = useState(0);
   const [isLoadingSnippetCount, setIsLoadingSnippetCount] = useState(false);
@@ -271,7 +273,7 @@ export default function HomePage() {
      return (
       <SidebarProvider>
         <div className="flex flex-col min-h-screen">
-           <AppHeader onAddSnippet={handleAddSnippetClick} onSignOut={handleSignOut} userEmail={user?.email} />
+           <AppHeader onAddSnippet={handleAddSnippetClick} onShowChangelog={() => setIsChangelogOpen(true)} onSignOut={handleSignOut} userEmail={user?.email} />
           <main className="flex-1 container mx-auto p-4 md:p-8 space-y-6 flex justify-center items-center">
             <Loader2 className="h-10 w-10 animate-spin text-primary" />
             <p className="text-lg text-muted-foreground ml-3">Loading your snippets...</p>
@@ -284,7 +286,7 @@ export default function HomePage() {
   return (
     <SidebarProvider>
       <div className="flex flex-col min-h-screen bg-background">
-        <AppHeader onAddSnippet={handleAddSnippetClick} onSignOut={handleSignOut} userEmail={user?.email} />
+        <AppHeader onAddSnippet={handleAddSnippetClick} onShowChangelog={() => setIsChangelogOpen(true)} onSignOut={handleSignOut} userEmail={user?.email} />
         <div className="flex flex-1">
           <Sidebar collapsible="icon" className="border-r" side="left">
             <SidebarRail />
@@ -355,6 +357,7 @@ export default function HomePage() {
           </SidebarInset>
         </div>
       </div>
+      <ChangelogDialog isOpen={isChangelogOpen} onOpenChange={setIsChangelogOpen} />
       <SnippetFormDialog
         isOpen={isFormOpen}
         onOpenChange={setIsFormOpen}
@@ -374,5 +377,3 @@ export default function HomePage() {
     </SidebarProvider>
   );
 }
-
-    

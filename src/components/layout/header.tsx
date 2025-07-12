@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { PlusCircle, LogOut } from 'lucide-react';
+import { PlusCircle, LogOut, BookText } from 'lucide-react';
 import { ThemeToggleButton } from '@/components/theme-toggle-button';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,11 +16,12 @@ import { SidebarTrigger } from '@/components/ui/sidebar'; // Import SidebarTrigg
 
 interface AppHeaderProps {
   onAddSnippet: () => void;
+  onShowChangelog: () => void;
   onSignOut?: () => void;
   userEmail?: string | null;
 }
 
-export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps) {
+export function AppHeader({ onAddSnippet, onShowChangelog, onSignOut, userEmail }: AppHeaderProps) {
   const getInitials = (email?: string | null) => {
     if (!email) return "?";
     const parts = email.split("@")[0].split(/[._-]/);
@@ -38,11 +39,17 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
           <span className="font-bold font-headline text-xl">DevoSnips</span>
         </Link>
         <nav className="flex items-center space-x-2">
-          {userEmail && ( 
-            <Button onClick={onAddSnippet} variant="outline">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Add Snippet
-            </Button>
+          {userEmail && (
+            <>
+              <Button onClick={onShowChangelog} variant="outline" className="hidden sm:inline-flex">
+                <BookText className="mr-2 h-4 w-4" />
+                Changelog
+              </Button>
+              <Button onClick={onAddSnippet} variant="outline">
+                <PlusCircle className="mr-2 h-4 w-4" />
+                Add Snippet
+              </Button>
+            </>
           )}
           <ThemeToggleButton />
           {userEmail && onSignOut && (
@@ -77,5 +84,3 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
     </header>
   );
 }
-
-    
