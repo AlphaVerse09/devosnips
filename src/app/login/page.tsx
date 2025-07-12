@@ -116,7 +116,7 @@ export default function LoginPage() {
         </div>
       </header>
       <main className="flex-1 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md shadow-xl">
+        <Card className="w-full max-w-md shadow-xl mx-2">
           <CardHeader className="text-center">
             <CardTitle className="font-headline text-2xl">Welcome to DevoSnips</CardTitle>
             <CardDescription>

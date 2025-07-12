@@ -148,9 +148,9 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
     <>
       <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
         <CardHeader>
-          <div className="flex justify-between items-start gap-2">
-            <CardTitle className="font-headline text-xl mb-1 break-all">{snippet.title}</CardTitle>
-            <div className="flex flex-col items-end gap-1 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
+            <CardTitle className="font-headline text-xl mb-1 break-all sm:flex-1">{snippet.title}</CardTitle>
+            <div className="flex flex-row sm:flex-col items-start sm:items-end gap-1 flex-shrink-0">
               <Badge variant="outline" className="flex items-center gap-1.5 whitespace-nowrap">
                 <CategoryIcon />
                 {snippet.category}
@@ -201,10 +201,10 @@ export function SnippetItem({ snippet, onEdit, onDelete }: SnippetItemProps) {
           </Highlight>
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-2 mt-auto">
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground self-start sm:self-center">
             Last updated: {snippet.updatedAt ? formatDistanceToNow(new Date(snippet.updatedAt), { addSuffix: true }) : 'N/A'}
           </p>
-          <div className="flex gap-1 sm:gap-2 flex-wrap">
+          <div className="flex gap-2 flex-wrap self-end sm:self-center">
             <Button variant="outline" size="sm" onClick={() => setIsViewDialogOpen(true)}>
                 <Eye className="mr-2 h-4 w-4" />
                 View

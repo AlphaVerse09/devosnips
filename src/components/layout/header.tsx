@@ -40,9 +40,13 @@ export function AppHeader({ onAddSnippet, onSignOut, userEmail }: AppHeaderProps
         <nav className="flex items-center space-x-1 sm:space-x-2">
           {userEmail && (
             <>
-              <Button onClick={onAddSnippet} variant="outline" className="h-9">
+              <Button onClick={onAddSnippet} variant="outline" size="sm" className="hidden sm:inline-flex">
                 <PlusCircle className="mr-2 h-4 w-4" />
                 Add Snippet
+              </Button>
+              <Button onClick={onAddSnippet} variant="ghost" size="icon" className="sm:hidden">
+                <PlusCircle className="h-5 w-5" />
+                <span className="sr-only">Add Snippet</span>
               </Button>
             </>
           )}

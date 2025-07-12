@@ -308,7 +308,7 @@ export default function HomePage() {
 
           <SidebarInset>
             <main className="flex flex-1 flex-col p-3 sm:p-4 md:p-6 space-y-6">
-              <div className="flex flex-col md:flex-row gap-3 md:items-center justify-between p-4 rounded-lg border bg-card shadow-sm">
+              <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between p-4 rounded-lg border bg-card shadow-sm">
                 <SearchBar currentSearch={searchTerm} onSearchChange={setSearchTerm} className="w-full md:w-auto md:flex-1 md:max-w-md" />
                 <div className="flex items-center gap-2 w-full sm:w-auto">
                   <Label htmlFor="sort-select" className="text-sm font-medium text-muted-foreground whitespace-nowrap">Sort by:</Label>
