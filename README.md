@@ -4,6 +4,7 @@ This project is licensed under the Apache License 2.0.
 See the [LICENSE](./LICENSE) file for details.
 
 A smart code snippet manager built to help developers save, organize, and find their code with ease.
+
 Link: https://devosnips.vercel.app/
 
 ## Key Features
