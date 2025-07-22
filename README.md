@@ -10,7 +10,7 @@ Link: https://devosnips.vercel.app/
 ## Key Features
 
 - **AI-Powered Classification**: Automatically categorizes your code snippets (JavaScript, Python, React, etc.) when you save them.
-- **Secure Cloud Storage**: All your snippets are securely stored in the cloud using Firebase Firestore, accessible from anywhere.
+- **Secure Cloud Storage**: All your snippets are securely stored in the cloud, accessible from anywhere.
 - **Full Snippet Management**: Create, edit, and delete snippets through a clean and intuitive interface.
 - **Advanced Organization**: Use main categories and create your own custom sub-categories to keep your snippets perfectly organized.
 - **Fast and Powerful Search**: Instantly find any snippet by searching through titles, descriptions, or even the code itself.
